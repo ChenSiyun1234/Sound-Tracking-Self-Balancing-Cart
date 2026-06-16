@@ -34,7 +34,9 @@ Self-balancing two-wheel robot on a **TI CC3200 LaunchPad** (Cortex-M4 + on-chip
 
 ## Wiring
 
-<img src="images/wiring_cc3200.png" width="840" alt="CC3200 wiring diagram — every module's connection to the MCU">
+<img src="images/schematic_cc3200.png" width="920" alt="CC3200 connection schematic — MCU pins wired to every module, with power rails">
+
+<sub>↑ full connection schematic · also: a [pin-out card](images/pinout_cc3200.png) of the device pins used.</sub>
 
 ## Hardware
 

@@ -40,7 +40,7 @@ Bluetooth remote · ultrasonic scan-and-turn avoidance · live PID tuning · fla
 |:---:|:---:|
 | <img src="STM32/images/stm32_balancing.gif" width="220" alt="STM32 cart self-balancing"> | <img src="STM32/images/stm32_oled.jpg" width="280" alt="STM32 OLED status"> |
 
-<img src="STM32/images/wiring_stm32.png" width="820" alt="STM32 wiring diagram">
+<img src="STM32/images/schematic_stm32.png" width="900" alt="STM32 connection schematic — MCU wired to every module">
 
 ### ▶ CC3200 build
 
@@ -50,7 +50,7 @@ Kalman sensor fusion · colour OLED · **Wi-Fi / AWS-IoT** email alerts on power
 |:---:|:---:|
 | <img src="CC3200/images/cc3200_balancing.gif" width="220" alt="CC3200 cart self-balancing"> | <img src="CC3200/images/cc3200_oled.gif" width="220" alt="CC3200 OLED status"> |
 
-<img src="CC3200/images/wiring_cc3200.png" width="820" alt="CC3200 wiring diagram">
+<img src="CC3200/images/schematic_cc3200.png" width="900" alt="CC3200 connection schematic — MCU wired to every module">
 
 ---
 

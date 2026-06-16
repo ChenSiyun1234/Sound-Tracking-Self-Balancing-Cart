@@ -49,7 +49,9 @@ Full tuning procedure: **[TUNING.md](TUNING.md)**.
 
 ## Wiring
 
-<img src="images/wiring_stm32.png" width="840" alt="STM32 wiring diagram — every module's connection to the MCU">
+<img src="images/schematic_stm32.png" width="920" alt="STM32 connection schematic — MCU pins wired to every module, with power rails">
+
+<sub>↑ full connection schematic · also: a [pin-out card](images/pinout_stm32.png) showing every Blue-Pill header pin.</sub>
 
 **Key signals** — summary only; wire from **[WIRING.md](WIRING.md)**, which has the full table, power-rail plan, and 5 V-tolerance cautions:
 
