@@ -1,0 +1,37 @@
+# ─── Build output (CCS / TI ARM) ─────────────────────────────
+Debug/
+Release/
+*.obj
+*.d
+*.map
+*.out
+*.lst
+*.bin
+*.rl
+*.absclr
+*.dnm
+
+# ─── CCS / Eclipse workspace cruft ───────────────────────────
+.launches/
+.ptcache/
+.metadata/
+RemoteSystemsTempFiles/
+
+# ─── Keil MDK (STM32 version, future) ────────────────────────
+Objects/
+Listings/
+*.uvguix.*
+*.bak
+*.dep
+*.crf
+*.axf
+*.scvd
+*.iex
+*.htm
+
+# ─── OS / editor ─────────────────────────────────────────────
+Thumbs.db
+desktop.ini
+.DS_Store
+*~
+.vscode/

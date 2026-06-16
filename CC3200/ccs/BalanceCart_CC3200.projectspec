@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="TMS470"
+                deviceId="Cortex M.CC3200"
+            />
+        </when>
+    </applicability>
+    <project
+        title="BalanceCart_CC3200"
+        name="BalanceCart_CC3200"
+        toolChain="TI"
+        connection="Stellaris_ICDI_Connection.xml"
+        device="CC3200"
+        ignoreDefaultDeviceSettings="true"
+        compilerBuildOptions="
+		-mv7M4 --code_state=16 --float_support=none --abi=eabi -me -Ooff -I${CC3200_SDK_ROOT}/ -I${CG_TOOL_ROOT}/include -I${CC3200_SDK_ROOT}/driverlib/ -I${CC3200_SDK_ROOT}/inc/ -I${CC3200_SDK_ROOT}/example/common/ -I${CC3200_SDK_ROOT}/simplelink -I${CC3200_SDK_ROOT}/simplelink/include -I${CC3200_SDK_ROOT}/simplelink/source -I${CC3200_SDK_ROOT}/simplelink_extlib/provisioninglib -I${CC3200_SRC_ROOT}/ -I${CC3200_SRC_ROOT}/common/ -g --define=ccs --define=cc3200 --diag_warning=225 --diag_wrap=off --display_error_number"
+        linkerBuildOptions="-m${ProjName}.map --stack_size=0x1000 --heap_size=0x1000 -i${CG_TOOL_ROOT}/lib -i${CG_TOOL_ROOT}/include -l${CC3200_SDK_ROOT}/driverlib/ccs/Release/driverlib.a -l${CC3200_SDK_ROOT}/simplelink/ccs/NON_OS/simplelink.a --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info=${ProjName}_linkInfo.xml --rom_model"
+        postBuildStep="${CCS_INSTALL_ROOT}/utils/tiobj2bin/tiobj2bin ${BuildArtifactFileName} ${BuildArtifactFileBaseName}.bin ${CG_TOOL_ROOT}/bin/armofd ${CG_TOOL_ROOT}/bin/armhex ${CCS_INSTALL_ROOT}/utils/tiobj2bin/mkhex4bin"
+        description="EEC 172 self-balancing two-wheel cart - CC3200 vehicle side">
+
+        <property name="buildProfile" value="release"/>
+
+        <!-- ../../../reference/cc3200-sdk/CC3200SDK_1.5.0/cc3200-sdk : the CC3200
+             SDK 1.5.0, kept in this repo's reference/ tree (git-ignored).
+             ../src : the firmware source in this project.
+             Import this project spec "in place" (UNCHECK 'copy projects into
+             workspace') so these relative paths stay valid. If the build cannot
+             find SDK headers, set CC3200_SDK_ROOT to the SDK's absolute path in
+             Project > Properties > Resource > Linked Resources > Path Variables. -->
+        <pathVariable name="CC3200_SDK_ROOT" path="../../../reference/cc3200-sdk/CC3200SDK_1.5.0/cc3200-sdk" scope="project" />
+        <pathVariable name="CC3200_SRC_ROOT" path="../src" scope="project" />
+
+        <!-- ===== Firmware modules (this project) ===== -->
+        <file path="${CC3200_SRC_ROOT}/main.c"      openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/hw_config.h" openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/pinmux.c"    openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/pinmux.h"    openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/clock.c"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/clock.h"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/motor.c"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/motor.h"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/balance.c"   openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/balance.h"   openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/kalman.c"    openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/kalman.h"    openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/mpu6050.c"   openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/mpu6050.h"   openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/bma222drv.c" openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/bma222drv.h" openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/encoder.c"   openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/encoder.h"   openOnCreation="false" excludeFromBuild="false" action="link"/>
+
+        <!-- ===== SSD1351 colour OLED (SPI) driver, ported from the EEC172 i2c_demo ===== -->
+        <file path="${CC3200_SRC_ROOT}/Adafruit_GFX.c"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/Adafruit_GFX.h"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/Adafruit_OLED.c"    openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/Adafruit_SSD1351.h" openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/glcdfont.h"         openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/oled_test.h"        openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/pin_mux_config.h"   openOnCreation="false" excludeFromBuild="false" action="link"/>
+
+        <!-- ===== Wi-Fi email alert (compiles to stubs unless ENABLE_WIFI_EMAIL=1;
+             when enabled, also add the SimpleLink include paths + simplelink.a and
+             remove the NON_NETWORK define - see EMAIL_SETUP.md) ===== -->
+        <file path="${CC3200_SRC_ROOT}/cart_email.c"    openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/cart_email.h"    openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/network_utils.c" openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/network_utils.h" openOnCreation="false" excludeFromBuild="false" action="link"/>
+
+        <!-- ===== Shared TI SDK helpers (kept in this project's src/common) ===== -->
+        <file path="${CC3200_SRC_ROOT}/common/startup_ccs.c" openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/common/uart_if.c"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/common/uart_if.h"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/common/i2c_if.c"      openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/common/i2c_if.h"      openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/common/gpio_if.c"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+        <file path="${CC3200_SRC_ROOT}/common/gpio_if.h"     openOnCreation="false" excludeFromBuild="false" action="link"/>
+
+        <!-- ===== Linker command file (memory map) =====
+             Copied from the SDK so there is exactly ONE .cmd in the project
+             root. Do NOT keep a second .cmd anywhere under the project folder -
+             CCS recursively links every .cmd it finds and duplicates collide. -->
+        <file path="${CC3200_SDK_ROOT}/example/i2c_demo/ccs/cc3200v1p32.cmd" openOnCreation="false" excludeFromBuild="false" action="copy"/>
+    </project>
+</projectSpec>

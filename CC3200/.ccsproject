@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<ccsVersion value="9.3.0"/>
+	<deviceVariant value="Cortex M.CC3200"/>
+	<deviceFamily value="TMS470"/>
+	<deviceEndianness value="little"/>
+	<codegenToolVersion value="20.2.7.LTS"/>
+	<isElfFormat value="true"/>
+	<connection value="common/targetdb/connections/Stellaris_ICDI_Connection.xml"/>
+	<rts value="libc.a"/>
+	<createSlaveProjects value=""/>
+	<ignoreDefaultDeviceSettings value="true"/>
+	<templateProperties value="id=BalanceCart_CC3200.projectspec.BalanceCart_CC3200,buildProfile=release"/>
+	<origin value="D:\EEC 172 Motor\self-balancing-cart\CC3200\ccs\BalanceCart_CC3200.projectspec"/>
+	<filesToOpen value=""/>
+</projectOptions>
