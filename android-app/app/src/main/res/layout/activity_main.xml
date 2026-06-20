@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Not connected"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:paddingBottom="12dp" />
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect to HC-05" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:layout_marginTop="40dp">
+
+        <Space android:layout_row="0" android:layout_column="0" />
+        <Button android:id="@+id/btnFwd" android:layout_row="0" android:layout_column="1"
+            android:text="▲" android:textSize="22sp"
+            android:layout_width="92dp" android:layout_height="92dp" android:layout_margin="4dp" />
+        <Space android:layout_row="0" android:layout_column="2" />
+
+        <Button android:id="@+id/btnLeft" android:layout_row="1" android:layout_column="0"
+            android:text="◄" android:textSize="22sp"
+            android:layout_width="92dp" android:layout_height="92dp" android:layout_margin="4dp" />
+        <Button android:id="@+id/btnStop" android:layout_row="1" android:layout_column="1"
+            android:text="STOP" android:textColor="#B00020"
+            android:layout_width="92dp" android:layout_height="92dp" android:layout_margin="4dp" />
+        <Button android:id="@+id/btnRight" android:layout_row="1" android:layout_column="2"
+            android:text="►" android:textSize="22sp"
+            android:layout_width="92dp" android:layout_height="92dp" android:layout_margin="4dp" />
+
+        <Space android:layout_row="2" android:layout_column="0" />
+        <Button android:id="@+id/btnBack" android:layout_row="2" android:layout_column="1"
+            android:text="▼" android:textSize="22sp"
+            android:layout_width="92dp" android:layout_height="92dp" android:layout_margin="4dp" />
+        <Space android:layout_row="2" android:layout_column="2" />
+    </GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Speed (0–9)"
+        android:layout_marginTop="40dp" />
+
+    <SeekBar
+        android:id="@+id/seekSpeed"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:max="9"
+        android:progress="5" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hold a direction to drive · release = stop"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
