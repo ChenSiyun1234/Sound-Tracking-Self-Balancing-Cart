@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  BalanceBot companion API — serverless deployment. Exposes the PID gains over an
+  HTTP API and ingests robot telemetry from AWS IoT Core. This is the cloud
+  counterpart to the local dev server (api/server.py); deploy with `sam build &&
+  sam deploy --guided`.
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  GainsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_handler.handler
+      CodeUri: .
+      Environment:
+        Variables:
+          GAINS_TABLE: !Ref GainsTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref GainsTable
+      Events:
+        GetPid:
+          Type: HttpApi
+          Properties:
+            Path: /api/pid
+            Method: GET
+        SetPid:
+          Type: HttpApi
+          Properties:
+            Path: /api/pid
+            Method: POST
+
+  # Forward every telemetry message the robot publishes to AWS IoT Core into the
+  # same Lambda so the latest state is persisted.
+  TelemetryRule:
+    Type: AWS::IoT::TopicRule
+    Properties:
+      TopicRulePayload:
+        Sql: "SELECT * FROM 'balancebot/telemetry'"
+        AwsIotSqlVersion: "2016-03-23"
+        RuleDisabled: false
+        Actions:
+          - Lambda:
+              FunctionArn: !GetAtt ApiFunction.Arn
+
+  TelemetryRuleInvoke:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ApiFunction
+      Principal: iot.amazonaws.com
+      SourceArn: !GetAtt TelemetryRule.Arn
+
+Outputs:
+  ApiBaseUrl:
+    Description: Base URL of the HTTP API
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"

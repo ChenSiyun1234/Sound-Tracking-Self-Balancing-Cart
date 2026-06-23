@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node / Vite (web-react)
+node_modules/
+dist/
+*.local
+
+# Serverless / SAM build artifacts
+.serverless/
+.aws-sam/
+
+# Logs / editor
+*.log
+.DS_Store

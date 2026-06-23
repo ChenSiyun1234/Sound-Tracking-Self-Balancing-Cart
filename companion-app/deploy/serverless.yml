@@ -1,0 +1,46 @@
+# Serverless Framework equivalent of template.yaml — an alternative IaC path.
+# Deploy with:  serverless deploy
+service: balancebot-companion
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.12
+  region: us-west-2
+  environment:
+    GAINS_TABLE: ${self:service}-gains
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+          Resource:
+            - Fn::GetAtt: [GainsTable, Arn]
+
+functions:
+  api:
+    handler: lambda_handler.handler
+    events:
+      - httpApi:
+          path: /api/pid
+          method: get
+      - httpApi:
+          path: /api/pid
+          method: post
+
+resources:
+  Resources:
+    GainsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-gains
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
